@@ -1,65 +1,55 @@
-var main = document.getElementById('main');
-var time = document.getElementById('time');
-var bPlus = document.getElementsByClassName('btn')[0];
-var breakNum = document.getElementsByClassName('breakNum')[0];
-var bMinus = document.getElementsByClassName('btn')[1];
-var sPlus = document.getElementsByClassName('btn')[2];
-var sessionNum = document.getElementsByClassName('sessionNum')[0];
-var sMinus = document.getElementsByClassName('btn')[3];
-var audio = new Audio('alarm.mp3');
-var bDefault = 6;
-var sDefault = 26;
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
 
-bPlus.addEventListener('click', breakUp);
-bMinus.addEventListener('click', breakDown);
-sPlus.addEventListener('click', sessionUp);
-sMinus.addEventListener('click', sessionDown);
-main.addEventListener('click', sessionCountDown);
+class Pomodoro extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      break: 5,
+      session: 25,
+      type: "session",
+      time: 1500000,
+      active: false
+    }
+  }
 
-function breakUp() {
-  bDefault++;
-  breakNum.innerHTML = bDefault;
-}
+  handleTimers = (inc, mode) => {
+    this.setState({ [mode]: this.state[mode] + (inc ? 1 : -1) })
+  }
 
-function breakDown() {
-  bDefault--;
-  breakNum.innerHTML = bDefault;
-}
-
-function sessionUp() {
-  sDefault++;
-  sessionNum.innerHTML = sDefault;
-}
-
-function sessionDown() {
-  sDefault--;
-  sessionNum.innerHTML = sDefault;
-}
-
-
-function sessionCountDown() {
-  main.removeEventListener('click', sessionCountDown);
-  sDefault--;
-  time.innerHTML = sDefault;
-  if (sDefault >= 0) {
-    setTimeout(sessionCountDown, 1000);
-  } else {
-    breakCountDown();
-    audio.play();
+  render() {
+    return (
+      <div id="container">
+        <header>
+          <h1>Cronometrare Di Pomodoro</h1>
+        </header>
+        <div className="row">
+          <div class="two-halfs">
+            <h2 id="break-label">Break Length</h2>
+            <button id="break-increment" type="button" className="buttons n-resize" handleClick={this.handleTimers}><i className="fa fa-plus"></i></button>
+            <span id="break-length" className="white-letters">{this.state.break}</span>
+            <button id="break-decrement" type="button" className="buttons s-resize"><i className="fa fa-minus"></i></button>
+          </div>
+          <div class="two-halfs">
+            <h2 id="session-label">Session Length</h2>
+            <button id="session-increment" type="button" className="buttons n-resize"><i className="fa fa-plus"></i></button>
+            <span id="session-length" className="white-letters">{this.state.session}</span>
+            <button id="session-decrement" type="button" className="buttons s-resize"><i className="fa fa-minus"></i></button>
+          </div>
+        </div>
+        <br />
+        <div id="timer">
+          <div id="timer-label">{this.state.type === "session" ? "Session" : "Break"}</div>
+          <div id="time-left" className="white-letters">{this.state.time}</div>
+        </div>
+        <div className="row">
+          <button id="start_stop" className="controls" active={this.state.active}><i class="fa fa-play"></i>/<i class="fa fa-pause"></i></button>
+          <button id="reset" className="controls"><i class="fa fa-refresh"></i></button>
+        </div>
+      </div>
+    )
   }
 }
 
-function breakCountDown() {
-  bDefault--;
-  time.innerHTML = bDefault;
-  if (bDefault >= 0) {
-    setTimeout(breakCountDown, 1000);
-  } else {
-    time.innerHTML = "Start";
-    breakNum.innerHTML = 5;
-    bDefault = 5;
-    sessionNum.innerHTML = 25;
-    sDefault = 25;
-    main.addEventListener('click', sessionCountDown);
-  }
-}
+ReactDOM.render(<Pomodoro />, document.getElementById('root'));
