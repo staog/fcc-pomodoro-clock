@@ -101,3 +101,12 @@ span {
   font-size: 1.3em;
   cursor: pointer;
 }
+
+footer {
+  color: black;
+  padding-top: 20px;
+}
+
+strong {
+  color: darkgreen;
+}
