@@ -73,6 +73,6 @@ You can use this CDN link to run the tests in any environment you like: https://
 
 =======================================================================
 
-##TODO:
+## TODO:
 
-1. Because I've use fontawesome for play/pause and reset buttons, those buttons are not working if cursor is on icons, only around them.
+1. Because I've used fontawesome for play/pause and reset buttons, those buttons are not working if cursor is right on the  icons, only if you press it around them.
