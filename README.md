@@ -72,3 +72,7 @@ You can use this CDN link to run the tests in any environment you like: https://
 [DEMO](https://codepen.io/staog/full/eaaZWq)
 
 =======================================================================
+
+##TODO:
+
+1. Because I've use fontawesome for play/pause and reset buttons, those buttons are not working if cursor is on icons, only around them.
