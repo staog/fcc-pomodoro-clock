@@ -100,7 +100,10 @@ class Pomodoro extends React.Component {
         <br />
         <div id="timer">
           <div id="timer-label">{this.state.type === "session" ? "Session" : "Break"}</div>
-          <div id="time-left">{this.state.currentTime === 3600000 ? "60:00" : moment(this.state.currentTime).format("mm:ss")}</div>
+          <div id="time-left">{
+              this.state.currentTime === 3600000
+                ? "60:00" 
+                : moment(this.state.currentTime).format("mm:ss")}</div>
         </div>
         <div className="row">
           <div className="two-halfs">
@@ -122,7 +125,10 @@ class Pomodoro extends React.Component {
         </div>
         <br />
         <div className="row">
-          <button id="start_stop" className="controls" type={this.state.type} active={this.state.active} onClick={this.handlePlayAndPause}>{ this.state.active ? <i className="fa fa-pause"></i> : <i className="fa fa-play"></i> }</button>
+          <button id="start_stop" className="controls" type={this.state.type} active={this.state.active} onClick={this.handlePlayAndPause}>{ 
+              this.state.active 
+                ? <i className="fa fa-pause"></i> 
+                : <i className="fa fa-play"></i> }</button>
           <button id="reset" className="controls" onClick={this.handleReset}><i className="fa fa-refresh"></i></button>
         </div>
       </div>
